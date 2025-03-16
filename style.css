@@ -125,10 +125,10 @@ body {
 }
 
 .text.transparent {
-  color: #f5f5f5;
+  color: #fff;
 }
 .cart.transparent {
-  color: #f5f5f5;
+  color: #fff;
 }
 .explore {
   display: flex;
