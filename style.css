@@ -139,12 +139,86 @@ body {
   justify-content: center;
   margin-top: 150px;
 }
-slides {
+.slides {
+  position: relative;
   animation: product 10s ease infinite;
+  margin: 0 auto;
 }
 .product {
-  float: left;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  margin-top: 40px;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 .product img {
-  width: 400px;
+  flex: 1 0 100%;
+  width: 90px;
+  scroll-snap-align: start;
+  object-fit: cover;
+}
+.slider-nav {
+  display: flex;
+  column-gap: 0.1rem;
+  position: absolute;
+  margin-top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.slider-nav a {
+  width: 2.5rem;
+  height: 0.2rem;
+  border-radius: 5px;
+  background-color: #2a2929;
+  opacity: 75%;
+  transition: opacity ease 0.5s;
+}
+.slider-nav a:hover {
+  opacity: 100%;
+}
+.leftswipe {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+  margin-right: -100px;
+}
+.leftswipe button {
+  height: 100px;
+  z-index: 1;
+  width: 40px;
+  background-color: #f5f5f5;
+  border: none;
+}
+
+.leftswipe button img {
+  height: 40px;
+  width: 100%;
+}
+.rightswipe button {
+  height: 100px;
+  width: 40px;
+  z-index: 1;
+  background-color: #f5f5f5;
+  border: none;
+}
+.rightswipe {
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+  margin-left: -100px;
+}
+.rightswipe button img {
+  height: 40px;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+.vid img {
+  height: 80px;
+  width: 100px;
 }

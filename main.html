@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elegance</title>
-    <link rel="stylesheet" href="/elegance-shopping-website/style.css" />
+    <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,24 +26,46 @@
       <div class="logo" id="mainLogo">ELEGANCE</div>
     </div>
     <div class="banner">
-      <img
-        src="/elegance-shopping-website/Airbrush-Image-Enhancer.jpeg"
-        alt=""
-      />
+      <img src="/components/Airbrush-Image-Enhancer.jpeg" alt="" />
       <span>New Collection</span>
       <button>Discover More</button>
     </div>
     <div class="explore">
       <span>EXPLORE THE TRENDING PRODUCTS</span>
     </div>
-    <div class="slides">
-      <div class="product">
-        <img src="/elegance-shopping-website/model1.jpeg" alt="" />
+    <section class="container">
+      <div class="leftswipe">
+        <button>
+          <img src="/components/less-than-solid.svg" alt="" />
+        </button>
       </div>
-      <div class="product">
-        <img src="/elegance-shopping-website/model2.jpeg" alt="" />
+      <div class="slides">
+        <div class="product">
+          <img id="1" src="/components/model1.jpeg" alt="" />
+          <img id="2" src="/components/model-1F.jpeg" alt="" />
+          <img id="3" src="/components/model2.jpeg" alt="" />
+          <img id="4" src="/components/model-2F.jpeg" alt="" />
+        </div>
       </div>
+      <div class="rightswipe">
+        <a id="img3" href="#3"></a>
+        <button
+          onclick="document.getElementById('img3').click();"
+          id="rightButton"
+        >
+          <img src="/components/greater-than-solid.svg" alt="" />
+        </button>
+      </div>
+    </section>
+    <div class="slider-nav">
+      <a href="#1"></a>
+      <a href="#2"></a>
+      <a href="#3"></a>
+      <a href="#4"></a>
     </div>
-    <script src="/elegance-shopping-website/script.js"></script>
+    <div class="vid">
+      <img src="/components/FSH-1737365497318-020cover01.webp" alt="" />
+    </div>
+    <script src="/script.js"></script>
   </body>
 </html>

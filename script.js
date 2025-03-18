@@ -21,3 +21,8 @@ function handleScroll() {
 window.addEventListener("scroll", handleScroll);
 
 handleScroll();
+
+function slideshow() {
+  const rightButton = document.getElementById("rightButton");
+  rightButton.click();
+}
