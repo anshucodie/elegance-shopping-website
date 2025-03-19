@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Bentham&family=Manrope:wght@200..800&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Inconsolata:wght@200..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="header" id="header">
@@ -47,12 +51,9 @@
           <img id="4" src="/components/model-2F.jpeg" alt="" />
         </div>
       </div>
-      <div class="rightswipe">
+      <div id="rightswipe" class="rightswipe">
         <a id="img3" href="#3"></a>
-        <button
-          onclick="document.getElementById('img3').click();"
-          id="rightButton"
-        >
+        <button onclick="slideshow()" id="rightButton">
           <img src="/components/greater-than-solid.svg" alt="" />
         </button>
       </div>
@@ -63,8 +64,23 @@
       <a href="#3"></a>
       <a href="#4"></a>
     </div>
+    <div class="newheading">
+      <h2>NEW IN ELEGANCE</h2>
+    </div>
+
     <div class="vid">
-      <img src="/components/FSH-1737365497318-020cover01.webp" alt="" />
+      <div class="vid1">
+        <video autoplay loop muted src="/components/COSstores.mp4"></video>
+        <p>CASUAL X FORMAL COLLECTION</p>
+      </div>
+      <div class="vid2">
+        <video autoplay loop muted src="/components/Fashionweek.mp4"></video>
+        <p>AW'24/25 FASHIONWEEK</p>
+      </div>
+      <div class="vid3">
+        <video autoplay loop muted src="/components/Female outfits.mp4"></video>
+        <p>CLASSY OFFICE LOOK</p>
+      </div>
     </div>
     <script src="/script.js"></script>
   </body>

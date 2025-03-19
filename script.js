@@ -23,6 +23,8 @@ window.addEventListener("scroll", handleScroll);
 handleScroll();
 
 function slideshow() {
-  const rightButton = document.getElementById("rightButton");
-  rightButton.click();
+  // const rightButton = document.getElementById("rightButton");
+  const currImg = document.getElementById("rightswipe").innerHTML;
+  console.log(currImg);
+  document.getElementById("img3").click();
 }
