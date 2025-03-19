@@ -16,7 +16,9 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
+    <!-- HEADER -->
     <div class="header" id="header">
       <div class="menu-placeholder">MENU</div>
       <div class="text" id="bannertext">
@@ -25,10 +27,11 @@
       <!-- Logo will appear here when scrolled -->
       <div class="cart" id="cart">CART</div>
     </div>
-
     <div class="logo-container">
       <div class="logo" id="mainLogo">ELEGANCE</div>
     </div>
+
+    <!-- MAIN IMAGE -->
     <div class="banner">
       <img src="/components/Airbrush-Image-Enhancer.jpeg" alt="" />
       <span>New Collection</span>
@@ -37,6 +40,8 @@
     <div class="explore">
       <span>EXPLORE THE TRENDING PRODUCTS</span>
     </div>
+
+    <!-- SLIDESHOW -->
     <section class="container">
       <div class="leftswipe">
         <button>
@@ -44,7 +49,7 @@
         </button>
       </div>
       <div class="slides">
-        <div class="product">
+        <div id="product" class="product">
           <img id="1" src="/components/model1.jpeg" alt="" />
           <img id="2" src="/components/model-1F.jpeg" alt="" />
           <img id="3" src="/components/model2.jpeg" alt="" />
@@ -53,11 +58,13 @@
       </div>
       <div id="rightswipe" class="rightswipe">
         <a id="img3" href="#3"></a>
+      <div class="rightswipe">
         <button onclick="slideshow()" id="rightButton">
           <img src="/components/greater-than-solid.svg" alt="" />
         </button>
       </div>
     </section>
+
     <div class="slider-nav">
       <a href="#1"></a>
       <a href="#2"></a>
@@ -67,7 +74,6 @@
     <div class="newheading">
       <h2>NEW IN ELEGANCE</h2>
     </div>
-
     <div class="vid">
       <div class="vid1">
         <video autoplay loop muted src="/components/COSstores.mp4"></video>
