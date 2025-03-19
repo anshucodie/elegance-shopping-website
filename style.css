@@ -15,7 +15,6 @@
 body {
   height: 200vh; /* Extra height for scrolling */
   background-color: #f5f5f5;
-  cursor: pointer;
 }
 
 .header {
@@ -212,6 +211,7 @@ body {
 .rightswipe button img {
   height: 40px;
   width: 100%;
+  cursor: pointer;
 }
 
 .container {
