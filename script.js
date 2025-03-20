@@ -32,12 +32,33 @@ function getCurrentImage() {
   return visibleImageIndex;
 }
 
-function slideshow() {
+function rightSlideshow() {
   let currImage = getCurrentImage();
   currImage = (currImage % 4) + 1;
 
-  const nextImageLink = document.querySelector(`a[href="#${currImage}"]`);
-  if (nextImageLink) {
-    nextImageLink.click();
-  }
+  const product = document.getElementById("product");
+  const imageWidth = product.clientWidth;
+  product.scrollTo({
+    left: (currImage - 1) * imageWidth,
+    behavior: "smooth",
+  });
 }
+
+function leftSlideshow() {
+  let currImage = getCurrentImage();
+  currImage = currImage - 1;
+
+  if (currImage < 1) {
+    currImage = 4;
+  }
+  const product = document.getElementById("product");
+  const imageWidth = product.clientWidth;
+  product.scrollTo({
+    left: (currImage - 1) * imageWidth,
+    behavior: "smooth",
+  });
+}
+
+setInterval(() => {
+  document.getElementById("rightButton").click();
+}, 2000);
