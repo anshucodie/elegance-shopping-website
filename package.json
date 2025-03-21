@@ -19,6 +19,8 @@
   "homepage": "https://github.com/anshucodie/elegance-shopping-website#readme",
   "dependencies": {
     "express": "^4.21.2",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.12.1"
   }
 }
