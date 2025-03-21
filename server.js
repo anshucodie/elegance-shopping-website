@@ -49,8 +49,6 @@ async function connectToDatabase() {
     });
   } catch (err) {
     console.error("Error connecting to MongoDB:", err.message);
-  } finally {
-    client.close();
   }
 }
 
