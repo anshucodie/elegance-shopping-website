@@ -141,7 +141,11 @@ body {
   font-weight: 300;
   font-size: 30px;
   justify-content: center;
+<<<<<<< Updated upstream
   margin-top: 75px;
+=======
+  margin-top: 100px;
+>>>>>>> Stashed changes
 }
 
 .slides {
@@ -178,7 +182,7 @@ body {
 }
 
 .slider-nav a {
-  width: 2.5rem;
+  width: 4rem;
   height: 0.2rem;
   border-radius: 5px;
   background-color: #2a2929;
@@ -312,12 +316,136 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   height: 35px;
-  width: 130px;
+  width: 150px;
   font-size: 17px;
   font-weight: 500;
-  background-color: #f5f5f5;
+  background-color: transparent;
   border: 0.5px solid #f5f5f5;
-  margin-top: -150px;
-  margin-left: 65px;
-  backdrop-filter: blur(15px);
+  color: #f5f5f5;
+  margin-top: -190px;
+  margin-left: 110px;
+  backdrop-filter: blur(5px);
+}
+.bottom {
+  background-color: black;
+  color: #f5f5f5;
+  margin-top: 100px;
+}
+.para {
+  padding-top: 100px;
+}
+.para p {
+  font-size: 27.5px;
+  font-weight: 400;
+  font-family: Bitter;
+  letter-spacing: 0.07rem;
+  line-height: 3rem;
+  text-align: center;
+  max-width: 875px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.about {
+  display: flex;
+  margin-top: 100px;
+}
+.helpbar {
+  font-size: 20px;
+  color: #808080;
+  margin-left: 70px;
+}
+.cont1 {
+  margin-top: 35px;
+}
+.cont1 p {
+  font-size: 15px;
+  color: #fff;
+  margin-top: 10px;
+}
+.company {
+  color: #808080;
+  font-size: 20px;
+  margin-left: 60px;
+}
+.cont2 {
+  margin-top: 35px;
+}
+.cont2 p {
+  font-size: 15px;
+  color: #fff;
+  margin-top: 10px;
+}
+.socials {
+  font-size: 20px;
+  color: #808080;
+  margin-left: 60px;
+}
+.cont3 {
+  margin-top: 35px;
+}
+.cont3 p {
+  font-size: 15px;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.policies {
+  font-size: 20px;
+  color: #808080;
+  margin-left: 60px;
+}
+.cont4 {
+  margin-top: 35px;
+}
+.cont4 p {
+  font-size: 15px;
+  color: #fff;
+  margin-top: 10px;
+}
+.region {
+  color: #808080;
+  font-size: 20px;
+  margin-left: 60px;
+  width: 470px;
+}
+
+.region p {
+  font-size: 15px;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.holder input {
+  width: 100%;
+  height: 30px;
+  margin-top: 30px;
+  background-color: black;
+  border-color: #464444;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+}
+::placeholder {
+  color: #f5f5f5;
+  font-size: 16px;
+}
+
+.language {
+  color: #808080;
+  font-size: 20px;
+  margin-left: 60px;
+  width: 470px;
+  margin-top: 40px;
+}
+
+.language p {
+  font-size: 15px;
+  color: #fff;
+  margin-top: 15px;
+}
+.copyright {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 13px;
+  margin-top: 100px;
+  margin-left: 70px;
 }
