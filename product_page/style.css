@@ -21,7 +21,7 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 91%;
+  width: 92%;
   height: 70px;
   background-color: #fff;
   display: flex;
@@ -76,7 +76,7 @@
 
 .search-bar-input {
   border: none;
-  width: 100%;
+  width: 97.5%;
   font-size: 14px;
   padding-left: 2px;
   text-transform: uppercase;
@@ -106,4 +106,16 @@
 .filter-btn {
   padding-top: 150px;
   margin-left: 20px;
+}
+.grid1 {
+  display: grid;
+  grid-auto-flow: column;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  column-gap: 80px;
+}
+.grid1 img {
+  height: 350px;
+  width: 225px;
 }
