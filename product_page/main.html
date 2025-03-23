@@ -4,11 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Page</title>
-    <link rel="stylesheet" href="products.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bentham&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
-    <div class="js-main"></div>
+    <!-- HEADER -->
+    <div class="main-head">
+      <div class="header" id="header">
+        <span class="counter-cart">CATEGORIES</span>
+        <div class="logo-container">
+          <div class="logo" id="mainLogo">ELEGANCE</div>
+        </div>
+        <span class="cart" id="cart">CART</span>
+      </div>
+    </div>
 
-    <script src="products.js"></script>
+    <!-- SEARCH BAR -->
+    <div class="outer-search-bar">
+      <div class="search-bar">
+        <div class="upper-search">
+          <input type="text" class="search-bar-input" placeholder="SEARCH" />
+          <img
+            class="cross-icon"
+            src="/components/cross-svgrepo-com.png"
+            alt=""
+          />
+        </div>
+        <hr class="search-bar-hr" />
+      </div>
+      <p class="filter-btn">FILTERS</p>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="products"></div>
+
+    <script src="product.js"></script>
   </body>
 </html>
