@@ -16,14 +16,14 @@ fetch("http://localhost:3000/api/data")
           collection.forEach((item) => {
             productHTML += `
         <div class="product">
-            <img src="/components/model-1F.jpeg" alt="">
-              <div class="product-info">
-                <h3>${item.name}</h3>
-                <p>Price: ₹${item.price}</p>
-                <p>Rating: ⭐ ${item.ratings}</p>
-                <button class="add-to-cart-btn">ADD TO CART</button>
-              </div>
-              </div>
+          <img src="components/model-1F.jpeg" alt="Product Name">
+            <div class="product-info">
+              <h3>${item.name}</h3>
+              <p>Price: ₹${item.price}</p>
+              <p>Rating: ⭐ ${item.ratings}</p>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            </div>
             `;
           });
         }
