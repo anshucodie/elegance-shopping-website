@@ -15,14 +15,14 @@ fetch("http://localhost:3000/api/data")
         if (Array.isArray(collection)) {
           collection.forEach((item) => {
             productHTML += `
-              <div class="product-card">
-                  <h3>${item.name}</h3>
-                  <p>Price: $${item.price}</p>
-                  <p>Category: ${item.category}</p>
-                  <p>Ratings: ${item.ratings}</p>
-                  <img src="${item.image || "default.jpg"}" alt="${
-              item.name
-            }" style="width:100px; height:auto;">
+        <div class="product">
+            <img src="/components/model-1F.jpeg" alt="">
+              <div class="product-info">
+                <h3>${item.name}</h3>
+                <p>Price: ₹${item.price}</p>
+                <p>Rating: ⭐ ${item.ratings}</p>
+                <button class="add-to-cart-btn">ADD TO CART</button>
+              </div>
               </div>
             `;
           });
@@ -32,9 +32,12 @@ fetch("http://localhost:3000/api/data")
       productHTML = "<p>No products available</p>";
     }
 
+    console.log(productHTML);
+
     const mainContainer = document.querySelector(".js-main");
     if (mainContainer) {
       mainContainer.innerHTML = productHTML;
+      mainContainer.classList.add("grid1");
     } else {
       console.error("Element with class 'js-main' not found.");
     }
