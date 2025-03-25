@@ -21,13 +21,42 @@
   <body>
     <!-- HEADER -->
     <div class="header" id="header">
-      <div class="menu-placeholder"><a href="/product_page/main.html" style="text-decoration: none; color: inherit;">SHOP</a></div>
+      <div class="menu-placeholder">
+        <a
+          href="/product_page/main.html"
+          style="text-decoration: none; color: inherit"
+          >SHOP</a
+        >
+      </div>
       <div class="text" id="bannertext">
         Shop for Spring Summer Arrivals'25 in stores now
       </div>
       <!-- Logo will appear here when scrolled -->
       <div class="cart" id="cart">CART</div>
     </div>
+    
+    <!-- Cart overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    
+    <!-- SLIDE-IN CART -->
+    <div class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+        <div class="cart-close" id="cart-close">✕</div>
+      </div>
+      <div class="cart-content">
+        <div class="empty-cart-message">Your cart is empty</div>
+        <!-- Cart items will be added here dynamically -->
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span>$0.00</span>
+        </div>
+        <button class="checkout-btn">Checkout</button>
+      </div>
+    </div>
+    
     <div class="logo-container">
       <div class="logo" id="mainLogo">ELEGANCE</div>
     </div>
@@ -36,7 +65,9 @@
     <div class="banner">
       <img src="/components/Airbrush-Image-Enhancer.jpeg" alt="" />
       <span>New Collection</span>
-      <button onclick="location.href='/product_page/main.html'">Discover More</button>
+      <button onclick="location.href='/product_page/main.html'">
+        Discover More
+      </button>
     </div>
     <div class="explore">
       <span>EXPLORE THE TRENDING PRODUCTS</span>
@@ -75,7 +106,9 @@
         <img src="/components/banner2.jpg" alt="" />
       </div>
       <div class="shopbutton">
-        <button onclick="location.href='/product_page/main.html'">Shop the selection</button>
+        <button onclick="location.href='/product_page/main.html'">
+          Shop the selection
+        </button>
       </div>
     </div>
     <div class="newheading">

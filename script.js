@@ -62,3 +62,32 @@ function leftSlideshow() {
 setInterval(() => {
   document.getElementById("rightButton").click();
 }, 2000);
+
+// Cart Functionality
+document.addEventListener("DOMContentLoaded", function () {
+  const cartButton = document.getElementById("cart");
+  const cartSidebar = document.getElementById("cart-sidebar");
+  const cartClose = document.getElementById("cart-close");
+  const cartOverlay = document.getElementById("cart-overlay");
+
+  // Open cart when CART is clicked
+  cartButton.addEventListener("click", function () {
+    cartSidebar.classList.add("active");
+    cartOverlay.classList.add("active");
+    document.body.style.overflow = "hidden"; // Prevent scrolling when cart is open
+  });
+
+  // Close cart when ✕ is clicked
+  cartClose.addEventListener("click", function () {
+    cartSidebar.classList.remove("active");
+    cartOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
+
+  // Close cart when clicking on overlay
+  cartOverlay.addEventListener("click", function () {
+    cartSidebar.classList.remove("active");
+    cartOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
+});

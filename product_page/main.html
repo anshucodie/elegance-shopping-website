@@ -32,12 +32,40 @@
       </div>
     </div>
 
+    <!-- Cart overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    
+    <!-- SLIDE-IN CART -->
+    <div class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+        <div class="cart-close" id="cart-close">✕</div>
+      </div>
+      <div class="cart-content">
+        <div class="empty-cart-message">Your cart is empty</div>
+        <!-- Cart items will be added here dynamically -->
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span>$0.00</span>
+        </div>
+        <button class="checkout-btn">Checkout</button>
+      </div>
+    </div>
+
     <!-- SEARCH BAR -->
     <div class="outer-search-bar">
       <div class="search-bar">
         <div class="upper-search">
-          <input type="text" class="search-bar-input" placeholder="SEARCH" />
+          <input
+            type="text"
+            class="search-bar-input"
+            id="search-bar-input"
+            placeholder="SEARCH"
+          />
           <img
+            onclick="document.getElementById('search-bar-input').value = '';"
             class="cross-icon"
             src="/components/cross-svgrepo-com.png"
             alt=""

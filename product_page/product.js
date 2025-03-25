@@ -47,3 +47,45 @@ fetch("http://localhost:3000/api/data")
   .catch((error) => {
     console.error("Error fetching data:", error);
   });
+
+// Cart Functionality
+document.addEventListener("DOMContentLoaded", function () {
+  const cartButton = document.getElementById("cart");
+  const cartSidebar = document.getElementById("cart-sidebar");
+  const cartClose = document.getElementById("cart-close");
+  const cartOverlay = document.getElementById("cart-overlay");
+
+  // Open cart when CART is clicked
+  cartButton.addEventListener("click", function () {
+    cartSidebar.classList.add("active");
+    cartOverlay.classList.add("active");
+    document.body.style.overflow = "hidden"; // Prevent scrolling when cart is open
+  });
+
+  // Close cart when ✕ is clicked
+  cartClose.addEventListener("click", function () {
+    cartSidebar.classList.remove("active");
+    cartOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
+
+  // Close cart when clicking on overlay
+  cartOverlay.addEventListener("click", function () {
+    cartSidebar.classList.remove("active");
+    cartOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
+
+  // Add functionality to "Add to Cart" buttons (will be added dynamically after products load)
+  document.addEventListener("click", function (e) {
+    if (e.target && e.target.classList.contains("add-to-cart-btn")) {
+      // Open cart when adding items
+      cartSidebar.classList.add("active");
+      cartOverlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+
+      // You can add more functionality here to actually add items to cart
+      alert("Item added to cart!");
+    }
+  });
+});
