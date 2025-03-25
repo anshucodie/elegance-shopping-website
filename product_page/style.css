@@ -71,7 +71,7 @@
 
 .search-bar {
   padding-top: 150px;
-  width: 83%;
+  width: 81%;
 }
 
 .search-bar-input {
@@ -131,6 +131,8 @@
   font-family: "Arial", sans-serif;
   color: #333;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  overflow: hidden;
 }
 
 .product:hover {
@@ -144,6 +146,7 @@
   object-fit: cover;
   margin-bottom: 15px;
   transition: transform 0.3s ease;
+  height: 425px;
 }
 
 .product:hover img {
@@ -194,3 +197,13 @@
   transform: scale(1.05);
 }
 
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.grid-rows {
+  display: grid;
+  max-width: 89%;
+  gap: 4rem;
+}

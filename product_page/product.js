@@ -6,7 +6,7 @@ fetch("http://localhost:3000/api/data")
     return response.json();
   })
   .then((data) => {
-    console.log("Fetched Data:", data);
+    // console.log("Fetched Data:r", data);
 
     let productHTML = "";
     if (data && typeof data === "object") {
@@ -14,9 +14,10 @@ fetch("http://localhost:3000/api/data")
         const collection = data[coll];
         if (Array.isArray(collection)) {
           collection.forEach((item) => {
+            console.log(item);
             productHTML += `
         <div class="product">
-          <img src="components/model-1F.jpeg" alt="Product Name">
+          <img src="${item.image}" alt="Product Name">
             <div class="product-info">
               <h3>${item.name}</h3>
               <p>Price: ₹${item.price}</p>
@@ -38,6 +39,7 @@ fetch("http://localhost:3000/api/data")
     if (mainContainer) {
       mainContainer.innerHTML = productHTML;
       mainContainer.classList.add("grid1");
+      mainContainer.classList.add("grid-rows");
     } else {
       console.error("Element with class 'js-main' not found.");
     }
