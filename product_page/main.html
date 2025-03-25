@@ -36,8 +36,14 @@
     <div class="outer-search-bar">
       <div class="search-bar">
         <div class="upper-search">
-          <input type="text" class="search-bar-input" placeholder="SEARCH" />
+          <input
+            type="text"
+            class="search-bar-input"
+            id="search-bar-input"
+            placeholder="SEARCH"
+          />
           <img
+            onclick="document.getElementById('search-bar-input').value = '';"
             class="cross-icon"
             src="/components/cross-svgrepo-com.png"
             alt=""

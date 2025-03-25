@@ -90,6 +90,7 @@
   max-width: 10px;
   max-height: 10px;
   align-self: center;
+  cursor: pointer;
 }
 
 .upper-search {
