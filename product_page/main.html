@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Page</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/product_page/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,7 +22,11 @@
       <div class="header" id="header">
         <span class="counter-cart">CATEGORIES</span>
         <div class="logo-container">
-          <div class="logo" id="mainLogo">ELEGANCE</div>
+          <div class="logo" id="mainLogo">
+            <a href="/" style="text-decoration: none; color: inherit"
+              >ELEGANCE</a
+            >
+          </div>
         </div>
         <span class="cart" id="cart">CART</span>
       </div>
@@ -45,7 +49,9 @@
     </div>
 
     <!-- PRODUCTS -->
-    <div class="products js-main"></div>
-    <script src="product.js"></script>
+    <div class="grid-wrapper">
+      <div class="products js-main"></div>
+    </div>
+    <script src="/product_page/product.js"></script>
   </body>
 </html>

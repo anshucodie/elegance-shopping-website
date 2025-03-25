@@ -1,6 +1,7 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const cors = require("cors");
+const path = require("path");
 const app = express();
 const port = 3000;
 
@@ -8,11 +9,13 @@ const uri =
   "mongodb+srv://Manush:IIITV123@cluster0.7iady.mongodb.net/Elegance?retryWrites=true&w=majority";
 
 // Enable CORS with additional options
-app.use(cors({
-  origin: "*", 
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -22,6 +25,25 @@ app.options("*", (req, res) => {
 });
 
 app.use(express.json());
+
+// Serve static files from the root directory
+app.use(express.static(__dirname));
+
+// Set up routes
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "main.html"));
+});
+
+// Route for the product page
+app.get("/product_page/main.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "product_page", "main.html"));
+});
+
+// Serve static files from the product_page directory
+app.use("/product_page", express.static(path.join(__dirname, "product_page")));
+
+// Serve static files from the product_page directory for the /products route
+app.use("/products", express.static(path.join(__dirname, "product_page")));
 
 async function connectToDatabase() {
   const client = new MongoClient(uri, {
@@ -71,4 +93,7 @@ connectToDatabase();
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
+  console.log(
+    `Product page available at http://localhost:${port}/product_page/main.html`
+  );
 });
