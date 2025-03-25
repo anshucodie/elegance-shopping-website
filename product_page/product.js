@@ -22,10 +22,11 @@ fetch("http://localhost:3000/api/data")
               <h3>${item.name}</h3>
               <p>Price: ₹${item.price}</p>
               <p>Rating: ⭐ ${item.ratings}</p>
-              <button class="add-to-cart-btn">Add to Cart</button>
+              <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price = "${item.price}" data-product-image = "${item.image}">Add to Cart</button>
             </div>
             </div>
             `;
+            console.log(item.image);
           });
         }
       });
@@ -76,16 +77,107 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = ""; // Re-enable scrolling
   });
 
+  // Function to display cart
+
+  function SaveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function LoadCart() {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      return JSON.parse(savedCart);
+    }
+    return [];
+  }
+
+  const cart = LoadCart();
+
+  CartDisplay();
+
+  function CartDisplay() {
+    const cartItemsContainer = document.querySelector(".cart-content");
+    const total = document.querySelector(".total");
+    cartItemsContainer.innerHTML = "";
+
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p class="empty-cart-message">Your cart is empty.</p>';
+      total.innerHTML = '<p> ₹0.00 </p>';
+      return;
+    }
+
+    let totalPrice = 0;
+
+    cart.forEach((item, index) => {
+      const cartItemHTML = `
+          <div class="cart-item">
+            <div class="cart-image">
+              <img src="${item.productImage}" class="cart-img" alt="Product Image">
+            </div>
+            <div class="cart-product-info">        
+              <p>${item.productName}</p>
+              <p>₹ ${item.productPrice}</p>
+              <div class="price-cart">
+                <button class="price-counter" onclick="Decrease(${index})">-</button>
+                <p style="margin-right: 50px; margin-left: 50px;" class="js-quantity">${item.quantity}</p>
+                <button class="price-counter" onclick="Increase(${index})">+</button>
+              </div>
+            </div>
+          </div>
+      `;
+      cartItemsContainer.innerHTML += cartItemHTML;
+
+      totalPrice += parseFloat(item.productPrice) * item.quantity;
+      console.log(typeof (totalPrice));
+      total.innerHTML = `<p> ₹${totalPrice.toFixed(2)} </p>`;
+    });
+
+    SaveCart();
+  }
+
+  window.Increase = function (index) {
+    cart[index].quantity += 1;
+    CartDisplay();
+  };
+
+  window.Decrease = function (index) {
+    if (cart[index].quantity > 1) {
+      cart[index].quantity -= 1;
+      CartDisplay();
+    } else {
+      cart.splice(index, 1);
+      CartDisplay();
+    }
+  };
+
   // Add functionality to "Add to Cart" buttons (will be added dynamically after products load)
   document.addEventListener("click", function (e) {
     if (e.target && e.target.classList.contains("add-to-cart-btn")) {
-      // Open cart when adding items
       cartSidebar.classList.add("active");
       cartOverlay.classList.add("active");
       document.body.style.overflow = "hidden";
 
-      // You can add more functionality here to actually add items to cart
-      alert("Item added to cart!");
+      const productName = e.target.dataset.productName;
+      const productPrice = e.target.dataset.productPrice;
+      const productId = e.target.dataset.productId;
+      const productImage = e.target.dataset.productImage;
+
+      let matchingItem = cart.find((item) => item.productId === productId);
+
+      if (matchingItem) {
+        matchingItem.quantity += 1;
+      } else {
+        cart.push({
+          productId: productId,
+          productName: productName,
+          productPrice: productPrice,
+          productImage: productImage,
+          quantity: 1,
+        });
+      }
+
+      CartDisplay();
+      console.log(cart);
     }
   });
 });

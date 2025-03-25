@@ -213,8 +213,8 @@
 .cart-sidebar {
   position: fixed;
   top: 0;
-  right: -20vw; /* Start off-screen */
-  width: 20vw;
+  right: -35vw; /* Start off-screen */
+  width: 35vw;
   height: 100vh;
   background-color: white;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
@@ -316,4 +316,49 @@
 .cart-overlay.active {
   opacity: 1;
   visibility: visible;
+}
+
+.cart-image {
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: fill;
+}
+
+.cart-item{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 17px;
+}
+
+.cart-product-info{
+  flex: 1;
+}
+
+.price-cart{
+  display: flex;
+  margin-top: 5px;
+  font-size: larger;
+  position: relative;
+}
+
+.price-counter{
+  background-color: white;
+  border: none;
+  font-size: larger;
+  cursor: pointer;
+  width : 28px;
+}
+
+.price-counter:hover {
+  background-color: #a49f9f;
+  border-radius: 100%;
 }
