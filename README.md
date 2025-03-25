@@ -14,7 +14,7 @@ A modern e-commerce fashion website built with Express.js and MongoDB.
 1. Clone the repository
 2. Install dependencies:
    ```
-   npm install
+   npm i
    ```
 3. Start the server:
    ```
@@ -28,7 +28,7 @@ A modern e-commerce fashion website built with Express.js and MongoDB.
 ## Navigation
 
 - Home page: `http://localhost:3000/`
-- Product page: `http://localhost:3000/products`
+- Product page: `http://localhost:3000/product_page/main.html`
 
 ## API Endpoints
 
