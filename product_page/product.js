@@ -91,6 +91,8 @@ document.addEventListener("DOMContentLoaded", function () {
     return [];
   }
 
+  // CART FUNCTIONALITY
+
   const cart = LoadCart();
 
   CartDisplay();
@@ -101,6 +103,9 @@ document.addEventListener("DOMContentLoaded", function () {
     cartItemsContainer.innerHTML = "";
 
     if (cart.length === 0) {
+      cartItemsContainer.innerHTML =
+        '<p class="empty-cart-message">Your cart is empty.</p>';
+      total.innerHTML = "<p> ₹0.00 </p>";
       cartItemsContainer.innerHTML =
         '<p class="empty-cart-message">Your cart is empty.</p>';
       total.innerHTML = "<p> ₹0.00 </p>";
@@ -181,4 +186,38 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(cart);
     }
   });
+
+  // Categories functionality
+  const catButton = document.getElementById("cat");
+  const catSidebar = document.getElementById("cat-sidebar");
+  const catClose = document.getElementById("cat-close");
+  const catOverlay = document.getElementById("cat-overlay");
+
+  // Check if all required elements exist
+  if (catButton && catSidebar && catClose && catOverlay) {
+    // Open categories when CATEGORIES is clicked
+    catButton.addEventListener("click", function () {
+      catSidebar.classList.add("active");
+      catOverlay.classList.add("active");
+      document.body.style.overflow = "hidden"; // Prevent scrolling when categories panel is open
+    });
+
+    // Close categories when clicking on overlay
+    catOverlay.addEventListener("click", function () {
+      catSidebar.classList.remove("active");
+      catOverlay.classList.remove("active");
+      document.body.style.overflow = ""; // Re-enable scrolling
+    });
+
+    // Close categories when ✕ is clicked
+    catClose.addEventListener("click", function () {
+      catSidebar.classList.remove("active");
+      catOverlay.classList.remove("active");
+      document.body.style.overflow = ""; // Re-enable scrolling
+    });
+  } else {
+    console.error(
+      "One or more category panel elements are missing from the DOM"
+    );
+  }
 });

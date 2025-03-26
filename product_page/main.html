@@ -15,12 +15,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
+    <!-- Load the main script early to ensure cart functionality is available -->
+    <script src="/script.js"></script>
   </head>
   <body>
     <!-- HEADER -->
     <div class="main-head">
       <div class="header" id="header">
-        <span class="counter-cart">CATEGORIES</span>
+        <span class="counter-cart" id="cat">CATEGORIES</span>
         <div class="logo-container">
           <div class="logo" id="mainLogo">
             <a href="/" style="text-decoration: none; color: inherit"
@@ -34,7 +36,7 @@
 
     <!-- Cart overlay -->
     <div class="cart-overlay" id="cart-overlay"></div>
-    
+
     <!-- SLIDE-IN CART -->
     <div class="cart-sidebar" id="cart-sidebar">
       <div class="cart-header">
@@ -42,8 +44,8 @@
         <div class="cart-close" id="cart-close">✕</div>
       </div>
       <div class="cart-content">
-        <!-- <div class="empty-cart-message">Your cart is empty</div>
-        Cart items will be added here dynamically -->
+        <div class="empty-cart-message">Your cart is empty</div>
+        <!-- Cart items will be added here dynamically -->
       </div>
       <div class="cart-footer">
         <div class="cart-total">
@@ -51,6 +53,25 @@
           <span class="total"></span>
         </div>
         <button class="checkout-btn">Checkout</button>
+      </div>
+    </div>
+
+    <!-- CATEGORIES OVERLAY -->
+    <div class="cat-overlay" id="cat-overlay"></div>
+
+    <!-- SLIDE-IN CATEGORIES -->
+    <div class="cat-sidebar" id="cat-sidebar">
+      <div class="cat-header">
+        <h3>CATEGORIES</h3>
+        <div class="cat-close" id="cat-close">✕</div>
+      </div>
+      <div class="cat-content">
+        <ul class="category-list">
+          <li><a href="#">Men's Upper</a></li>
+          <li><a href="#">Women's Lower</a></li>
+          <li><a href="#">Men's Upper</a></li>
+          <li><a href="#">Women's Lower</a></li>
+        </ul>
       </div>
     </div>
 
@@ -73,7 +94,15 @@
         </div>
         <hr class="search-bar-hr" />
       </div>
-      <p class="filter-btn">FILTERS</p>
+      <div class="sort-dropdown">
+        <button class="sort-btn">SORT BY</button>
+        <div class="sort-content">
+          <a href="#">PRICE</a>
+          <a href="#">CATEGORY</a>
+          <a href="#">RATINGS</a>
+          <a href="#"></a>
+        </div>
+      </div>
     </div>
 
     <!-- PRODUCTS -->
