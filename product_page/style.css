@@ -173,6 +173,9 @@
   color: #666;
 }
 
+.product-info span {
+  font-family: Arial, sans-serif;
+}
 .product-info .price {
   font-size: 16px;
   font-weight: bold;
@@ -238,7 +241,7 @@
 
 .cart-header h3 {
   margin: 0;
-  font-family: 'Bentham', serif;
+  font-family: "Bentham", serif;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -265,7 +268,7 @@
   text-align: center;
   color: #777;
   margin-top: 30px;
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 .cart-footer {
@@ -277,7 +280,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
-  font-family: 'Bentham', serif;
+  font-family: "Bentham", serif;
   text-transform: uppercase;
 }
 
@@ -288,7 +291,7 @@
   background-color: black;
   color: white;
   border: none;
-  font-family: 'Bentham', serif;
+  font-family: "Bentham", serif;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -333,29 +336,29 @@
   object-fit: fill;
 }
 
-.cart-item{
+.cart-item {
   display: flex;
   justify-content: center;
   margin-bottom: 17px;
 }
 
-.cart-product-info{
+.cart-product-info {
   flex: 1;
 }
 
-.price-cart{
+.price-cart {
   display: flex;
   margin-top: 5px;
   font-size: larger;
   position: relative;
 }
 
-.price-counter{
+.price-counter {
   background-color: white;
   border: none;
   font-size: larger;
   cursor: pointer;
-  width : 28px;
+  width: 28px;
 }
 
 .price-counter:hover {

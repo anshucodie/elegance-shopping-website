@@ -20,8 +20,8 @@ fetch("http://localhost:3000/api/data")
           <img src="${item.image}" alt="Product Name">
             <div class="product-info">
               <h3>${item.name}</h3>
-              <p>Price: ₹${item.price}</p>
-              <p>Rating: ⭐ ${item.ratings}</p>
+              <p>Price: <span>₹${item.price}</span> </p>
+              <p>Rating: <i class="fa-regular fa-star" style="color: #000205;"></i> ${item.ratings}</p>
               <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price = "${item.price}" data-product-image = "${item.image}">Add to Cart</button>
             </div>
             </div>
@@ -101,8 +101,9 @@ document.addEventListener("DOMContentLoaded", function () {
     cartItemsContainer.innerHTML = "";
 
     if (cart.length === 0) {
-      cartItemsContainer.innerHTML = '<p class="empty-cart-message">Your cart is empty.</p>';
-      total.innerHTML = '<p> ₹0.00 </p>';
+      cartItemsContainer.innerHTML =
+        '<p class="empty-cart-message">Your cart is empty.</p>';
+      total.innerHTML = "<p> ₹0.00 </p>";
       return;
     }
 
@@ -128,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cartItemsContainer.innerHTML += cartItemHTML;
 
       totalPrice += parseFloat(item.productPrice) * item.quantity;
-      console.log(typeof (totalPrice));
+      console.log(typeof totalPrice);
       total.innerHTML = `<p> ₹${totalPrice.toFixed(2)} </p>`;
     });
 
