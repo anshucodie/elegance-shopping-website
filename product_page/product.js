@@ -193,10 +193,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const catClose = document.getElementById("cat-close");
   const catOverlay = document.getElementById("cat-overlay");
 
+  // Debug elements
+  console.log("Categories Button:", catButton);
+  console.log("Categories Sidebar:", catSidebar);
+  console.log("Categories Close:", catClose);
+  console.log("Categories Overlay:", catOverlay);
+
   // Check if all required elements exist
   if (catButton && catSidebar && catClose && catOverlay) {
+    console.log("All category elements found - setting up event listeners");
+
     // Open categories when CATEGORIES is clicked
     catButton.addEventListener("click", function () {
+      console.log("Categories button clicked");
       catSidebar.classList.add("active");
       catOverlay.classList.add("active");
       document.body.style.overflow = "hidden"; // Prevent scrolling when categories panel is open
@@ -204,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Close categories when clicking on overlay
     catOverlay.addEventListener("click", function () {
+      console.log("Categories overlay clicked");
       catSidebar.classList.remove("active");
       catOverlay.classList.remove("active");
       document.body.style.overflow = ""; // Re-enable scrolling
@@ -211,13 +221,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Close categories when ✕ is clicked
     catClose.addEventListener("click", function () {
+      console.log("Categories close button clicked");
       catSidebar.classList.remove("active");
       catOverlay.classList.remove("active");
       document.body.style.overflow = ""; // Re-enable scrolling
     });
   } else {
     console.error(
-      "One or more category panel elements are missing from the DOM"
+      "One or more category panel elements are missing from the DOM",
+      {
+        catButton: !!catButton,
+        catSidebar: !!catSidebar,
+        catClose: !!catClose,
+        catOverlay: !!catOverlay,
+      }
     );
   }
 });
