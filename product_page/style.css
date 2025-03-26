@@ -15,6 +15,8 @@
 .main-head {
   display: flex;
   justify-content: center;
+  z-index: 1000;
+  position: relative;
 }
 
 .header {
@@ -22,13 +24,15 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 92%;
+  width: 100%;
   height: 70px;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  /* padding: 0 20px; */
+  padding-left: 6%;
+  padding-right: 6%;
 }
 
 .counter-cart {
@@ -50,7 +54,6 @@
 .logo-container {
   width: 100%;
   height: 70px;
-  pointer-events: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,25 +111,27 @@
 .sort-dropdown {
   margin-top: 150px;
   position: relative;
-  z-index: 1;
   display: inline-block;
+  z-index: 500;
 }
 
 .sort-content {
   display: none;
   position: absolute;
+  transform: translateX(-27%);
 }
 
 .sort-content a {
   display: block;
+  color: #2a2929;
   text-decoration: none;
 }
 
 .sort-dropdown:hover .sort-content {
   display: block;
-  background: #e7e7e2;
-  padding: 15px;
-  border-radius: 5px;
+  background: #f1f1f1;
+  padding: 20px;
+  border-radius: 10px;
   line-height: 1.6;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
@@ -168,8 +173,9 @@
   font-family: "Arial", sans-serif;
   color: #333;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
+  height: inherit;
   overflow: hidden;
+  position: relative;
 }
 
 .product:hover {
@@ -183,11 +189,12 @@
   object-fit: cover;
   margin-bottom: 15px;
   transition: transform 0.3s ease;
-  height: 425px;
+  max-height: 425px;
 }
 
 .product:hover img {
   transform: scale(1.1);
+  max-height: 450px;
 }
 
 .product-info {
@@ -195,6 +202,7 @@
   line-height: 1.6;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  margin-top: 10px;
 }
 
 .product-info h3 {
@@ -276,13 +284,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 23px 30px;
   border-bottom: 1px solid #f0f0f0;
 }
 
 .cart-header h3 {
   margin: 0;
-  font-family: "Bentham", serif;
   font-family: "Bentham", serif;
   font-weight: 400;
   text-transform: uppercase;
@@ -381,7 +388,6 @@
 }
 
 .cart-item {
-.cart-item {
   display: flex;
   justify-content: center;
   margin-bottom: 17px;
@@ -398,7 +404,6 @@
   position: relative;
 }
 
-.price-counter {
 .price-counter {
   background-color: white;
   border: none;
@@ -436,7 +441,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 23px 30px;
   border-bottom: 1px solid #f0f0f0;
 }
 
