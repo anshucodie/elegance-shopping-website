@@ -6,43 +6,65 @@ fetch("http://localhost:3000/api/data")
     return response.json();
   })
   .then((data) => {
-    // console.log("Fetched Data:r", data);
-
     let productHTML = "";
+    let allProducts = [];
+
     if (data && typeof data === "object") {
       Object.keys(data).forEach((coll) => {
         const collection = data[coll];
         if (Array.isArray(collection)) {
-          collection.forEach((item) => {
-            console.log(item);
-            productHTML += `
-        <div class="product">
-          <img src="${item.image}" alt="Product Name">
+          allProducts = allProducts.concat(collection);
+        }
+      });
+
+      allProducts.sort((a, b) => a.name.localeCompare(b.name));
+
+      renderProducts(allProducts);
+    } 
+    
+    else {
+      productHTML = "<p>No products available</p>";
+      document.querySelector(".js-main").innerHTML = productHTML;
+    }
+
+    const searchBar = document.getElementById("search-bar-input");
+    searchBar.addEventListener("input", function (e) {
+      const searchTerm = e.target.value.toLowerCase();
+
+      const filteredProducts = prefixSearch(allProducts, searchTerm);
+      renderProducts(filteredProducts);
+    });
+
+    function renderProducts(products) {
+      const mainContainer = document.querySelector(".js-main");
+      if (!mainContainer) {
+        console.error("Element with class 'js-main' not found.");
+        return;
+      }
+
+      if (products.length === 0) {
+        mainContainer.innerHTML = "<p>No products match your search.</p>";
+        return;
+      }
+
+      let productHTML = "";
+      products.forEach((item) => {
+        productHTML += `
+          <div class="product">
+            <img src="${item.image}" alt="Product Name">
             <div class="product-info">
               <h3>${item.name}</h3>
               <p>Price: <span>₹${item.price}</span> </p>
               <p>Rating: <i class="fa-regular fa-star" style="color: #000205;"></i> ${item.ratings}</p>
-              <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price = "${item.price}" data-product-image = "${item.image}">Add to Cart</button>
+              <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price="${item.price}" data-product-image="${item.image}">Add to Cart</button>
             </div>
-            </div>
-            `;
-            console.log(item.image);
-          });
-        }
+          </div>
+        `;
       });
-    } else {
-      productHTML = "<p>No products available</p>";
-    }
 
-    console.log(productHTML);
-
-    const mainContainer = document.querySelector(".js-main");
-    if (mainContainer) {
       mainContainer.innerHTML = productHTML;
       mainContainer.classList.add("grid1");
       mainContainer.classList.add("grid-rows");
-    } else {
-      console.error("Element with class 'js-main' not found.");
     }
   })
   .catch((error) => {
@@ -50,6 +72,8 @@ fetch("http://localhost:3000/api/data")
   });
 
 // Cart Functionality
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const cartButton = document.getElementById("cart");
   const cartSidebar = document.getElementById("cart-sidebar");
