@@ -106,9 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cartItemsContainer.innerHTML =
         '<p class="empty-cart-message">Your cart is empty.</p>';
       total.innerHTML = "<p> ₹0.00 </p>";
-      cartItemsContainer.innerHTML =
-        '<p class="empty-cart-message">Your cart is empty.</p>';
-      total.innerHTML = "<p> ₹0.00 </p>";
+      localStorage.clear();
       return;
     }
 
