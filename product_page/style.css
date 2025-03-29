@@ -272,17 +272,31 @@
   text-transform: uppercase;
   color: #fff;
   background-color: #000;
-  border: #fff solid 1px;
-  border: none;
+  border: #000 solid 1px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.add-to-cart-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transition: left 0.3s ease;
+  z-index: -1;
 }
 
 .add-to-cart-btn:hover {
-  background-color: #fff;
   color: #000;
-  border: #000 solid 1px;
-  transform: ease 0.5s;
+}
+
+.add-to-cart-btn:hover::before {
+  left: 0;
 }
 
 .grid-wrapper {
