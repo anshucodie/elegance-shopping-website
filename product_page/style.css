@@ -160,7 +160,7 @@
 }
 
 .grid1 img {
-  height: 350px;
+  height: auto;
   width: 225px;
   object-fit: cover;
 }
@@ -176,25 +176,35 @@
   height: inherit;
   overflow: hidden;
   position: relative;
+  transform-origin: center top;
 }
 
 .product:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-link {
+  width: 100%;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
 .product img {
   width: 100%;
-  height: auto;
+  height: 425px;
   object-fit: cover;
+  object-position: center;
   margin-bottom: 15px;
   transition: transform 0.3s ease;
-  max-height: 425px;
 }
 
 .product:hover img {
   transform: scale(1.1);
-  max-height: 450px;
 }
 
 .product-info {
@@ -209,6 +219,28 @@
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.product-info h3:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  background: white;
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  white-space: normal;
+  max-width: 200px;
+  text-align: center;
+  border-radius: 3px;
 }
 
 .product-info p {
@@ -240,14 +272,31 @@
   text-transform: uppercase;
   color: #fff;
   background-color: #000;
-  border: none;
+  border: #000 solid 1px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.add-to-cart-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transition: left 0.3s ease;
+  z-index: -1;
 }
 
 .add-to-cart-btn:hover {
-  background-color: #444;
-  transform: scale(1.05);
+  color: #000;
+}
+
+.add-to-cart-btn:hover::before {
+  left: 0;
 }
 
 .grid-wrapper {
@@ -516,15 +565,6 @@
 }
 
 /* Product Links */
-.product-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
 .product-link:hover {
   opacity: 0.9;
 }
@@ -538,6 +578,7 @@
 
 .product .add-to-cart-btn {
   margin-top: 10px;
+  margin-bottom: 15px;
   align-self: center;
-  width: 90%;
+  width: 70%;
 }
