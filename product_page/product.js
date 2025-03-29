@@ -20,9 +20,7 @@ fetch("http://localhost:3000/api/data")
       allProducts.sort((a, b) => a.name.localeCompare(b.name));
 
       renderProducts(allProducts);
-    }
-
-    else {
+    } else {
       productHTML = "<p>No products available</p>";
       document.querySelector(".js-main").innerHTML = productHTML;
     }
@@ -51,13 +49,15 @@ fetch("http://localhost:3000/api/data")
       products.forEach((item) => {
         productHTML += `
           <div class="product">
-            <img src="${item.image}" alt="Product Name">
-            <div class="product-info">
-              <h3>${item.name}</h3>
-              <p>Price: <span>₹${item.price}</span> </p>
-              <p>Rating: <i class="fa-regular fa-star" style="color: #000205;"></i> ${item.ratings}</p>
-              <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price="${item.price}" data-product-image="${item.image}">Add to Cart</button>
-            </div>
+            <a href="/individual_page/main.html?id=${item._id}" class="product-link">
+              <img src="${item.image}" alt="Product Name">
+              <div class="product-info">
+                <h3>${item.name}</h3>
+                <p>Price: <span>₹${item.price}</span> </p>
+                <p>Rating: <i class="fa-regular fa-star" style="color: #000205;"></i> ${item.ratings}</p>
+              </div>
+            </a>
+            <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price="${item.price}" data-product-image="${item.image}">Add to Cart</button>
           </div>
         `;
       });
@@ -78,16 +78,12 @@ fetch("http://localhost:3000/api/data")
         console.error("Search bar not found!");
       }
     };
-
-
   })
   .catch((error) => {
     console.error("Error fetching data:", error);
   });
 
-
 // Cart Functionality
-
 
 document.addEventListener("DOMContentLoaded", function () {
   const cartButton = document.getElementById("cart");
