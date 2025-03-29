@@ -20,8 +20,8 @@ fetch("http://localhost:3000/api/data")
       allProducts.sort((a, b) => a.name.localeCompare(b.name));
 
       renderProducts(allProducts);
-    } 
-    
+    }
+
     else {
       productHTML = "<p>No products available</p>";
       document.querySelector(".js-main").innerHTML = productHTML;
@@ -31,7 +31,7 @@ fetch("http://localhost:3000/api/data")
     searchBar.addEventListener("input", function (e) {
       const searchTerm = e.target.value.toLowerCase();
 
-      const filteredProducts = prefixSearch(allProducts, searchTerm);
+      const filteredProducts = binarySearch(allProducts, searchTerm);
       renderProducts(filteredProducts);
     });
 
@@ -66,10 +66,25 @@ fetch("http://localhost:3000/api/data")
       mainContainer.classList.add("grid1");
       mainContainer.classList.add("grid-rows");
     }
+
+    window.clearSearchAndRenderAll = function () {
+      const searchBar = document.getElementById("search-bar-input");
+
+      if (searchBar) {
+        searchBar.value = "";
+        renderProducts(allProducts);
+        console.log("Cleared search and rendered all products");
+      } else {
+        console.error("Search bar not found!");
+      }
+    };
+
+
   })
   .catch((error) => {
     console.error("Error fetching data:", error);
   });
+
 
 // Cart Functionality
 

@@ -89,13 +89,14 @@
             placeholder="SEARCH"
           />
           <img
-            onclick="document.getElementById('search-bar-input').value = '';"
+            onclick="clearSearchAndRenderAll()"
             class="cross-icon"
             src="/components/cross-svgrepo-com.png"
             alt=""
           />
         </div>
         <hr class="search-bar-hr" />
+        
       </div>
       <div class="sort-dropdown">
         <button class="sort-btn">SORT BY</button>
