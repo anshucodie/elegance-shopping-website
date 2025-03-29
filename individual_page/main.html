@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Page</title>
+    <title>Product Details | Elegance</title>
     <link rel="stylesheet" href="/individual_page/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,35 +15,70 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
+    <!-- Load the main script early to ensure cart functionality is available -->
+    <script src="/script.js"></script>
   </head>
   <body>
-    <div class="page">
-      <div class="product_img">
-        <img src="/components/model-1F.jpg" alt="" />
-      </div>
-      <div class="sidecontainer">
+    <!-- HEADER -->
+    <div class="main-head">
+      <div class="header" id="header">
+        <div class="logo-container">
+          <div class="logo" id="mainLogo">
+            <a
+              style="text-decoration: none; color: inherit; cursor: pointer"
+              href="/"
+            >
+              ELEGANCE
+            </a>
+          </div>
+        </div>
         <div class="navbar">
           <div class="search">
             <input placeholder="SEARCH" name="" id="" />
           </div>
           <div class="filter_cart">
-            <span>FILTERS</span>
-            <span>CART</span>
+            <span id="cart">CART</span>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Cart overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- SLIDE-IN CART -->
+    <div class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+        <div class="cart-close" id="cart-close">✕</div>
+      </div>
+      <div class="cart-content">
+        <div class="empty-cart-message">Your cart is empty</div>
+        <!-- Cart items will be added here dynamically -->
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span class="total"></span>
+        </div>
+        <button class="checkout-btn">Checkout</button>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="product_img">
+        <img src="/components/model-1F.jpg" alt="" />
+      </div>
+      <div class="sidecontainer">
         <div class="about">
-          <div class="name">STRETCH HALTER PEPLUM TOP</div>
-          <div class="price">₹ 2,950.00</div>
+          <div class="name">Loading product...</div>
+          <div class="price">₹ 0.00</div>
           <div class="tax">MRP INCL OF ALL TAXES</div>
           <hr />
-          <div class="color">Black | <span>4661/029/800</span></div>
+          <div class="material">Material: <span>Loading...</span></div>
           <div class="button"><button>ADD TO CART</button></div>
           <div class="description">
-            <p>
-              Stretch top. Halter neck with buttons. Lining. Peplum hem.
-              Concealed<br />
-              side zip fastening.
-            </p>
+            <p>Loading product description...</p>
           </div>
           <div class="store">
             CHECK IN-STORE AVAILABILTY<br />
@@ -52,6 +87,6 @@
         </div>
       </div>
     </div>
-    <script src="/product_page/product.js"></script>
+    <script src="/individual_page/product.js"></script>
   </body>
 </html>

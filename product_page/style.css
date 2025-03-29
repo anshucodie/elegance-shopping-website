@@ -514,3 +514,30 @@
   opacity: 1;
   visibility: visible;
 }
+
+/* Product Links */
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.product-link:hover {
+  opacity: 0.9;
+}
+
+/* Add to Cart Button Positioning */
+.product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.product .add-to-cart-btn {
+  margin-top: 10px;
+  align-self: center;
+  width: 90%;
+}

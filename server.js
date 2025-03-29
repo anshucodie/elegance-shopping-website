@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const cors = require("cors");
 const path = require("path");
 const app = express();
@@ -39,11 +39,24 @@ app.get("/product_page/main.html", (req, res) => {
   res.sendFile(path.join(__dirname, "product_page", "main.html"));
 });
 
+// Route for the individual product page
+app.get("/individual_page/main.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "individual_page", "main.html"));
+});
+
 // Serve static files from the product_page directory
 app.use("/product_page", express.static(path.join(__dirname, "product_page")));
 
+// Serve static files from the individual_page directory
+app.use(
+  "/individual_page",
+  express.static(path.join(__dirname, "individual_page"))
+);
+
 // Serve static files from the product_page directory for the /products route
 app.use("/products", express.static(path.join(__dirname, "product_page")));
+
+let collections = {};
 
 async function connectToDatabase() {
   const client = new MongoClient(uri, {
@@ -57,17 +70,17 @@ async function connectToDatabase() {
     const database = client.db("Elegance");
 
     // Define multiple collections
-    const collection1 = database.collection("MenLowers");
-    const collection2 = database.collection("MenUppers");
-    const collection3 = database.collection("WomenUppers");
-    const collection4 = database.collection("WomenLowers");
+    collections.menLowers = database.collection("MenLowers");
+    collections.menUppers = database.collection("MenUppers");
+    collections.womenUppers = database.collection("WomenUppers");
+    collections.womenLowers = database.collection("WomenLowers");
 
     app.get("/api/data", async (req, res) => {
       try {
-        const data1 = await collection1.find({}).toArray();
-        const data2 = await collection2.find({}).toArray();
-        const data3 = await collection3.find({}).toArray();
-        const data4 = await collection4.find({}).toArray();
+        const data1 = await collections.menLowers.find({}).toArray();
+        const data2 = await collections.menUppers.find({}).toArray();
+        const data3 = await collections.womenUppers.find({}).toArray();
+        const data4 = await collections.womenLowers.find({}).toArray();
 
         console.log("Data fetched:", { data1, data2, data3, data4 });
 
@@ -84,6 +97,39 @@ async function connectToDatabase() {
         res.status(500).json({ error: "Failed to fetch data" });
       }
     });
+
+    // API endpoint to get a product by ID
+    app.get("/api/product/:id", async (req, res) => {
+      try {
+        const productId = req.params.id;
+
+        // Validate the ID format
+        if (!ObjectId.isValid(productId)) {
+          return res.status(400).json({ error: "Invalid product ID" });
+        }
+
+        const objectId = new ObjectId(productId);
+
+        // Search for the product in all collections
+        let product = null;
+
+        // Search in each collection
+        for (const [key, collection] of Object.entries(collections)) {
+          product = await collection.findOne({ _id: objectId });
+          if (product) break;
+        }
+
+        if (!product) {
+          return res.status(404).json({ error: "Product not found" });
+        }
+
+        console.log("Product found:", product);
+        res.json(product);
+      } catch (err) {
+        console.error("Error fetching product:", err);
+        res.status(500).json({ error: "Failed to fetch product" });
+      }
+    });
   } catch (err) {
     console.error("Error connecting to MongoDB:", err.message);
   }
@@ -95,5 +141,8 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
   console.log(
     `Product page available at http://localhost:${port}/product_page/main.html`
+  );
+  console.log(
+    `Individual product page available at http://localhost:${port}/individual_page/main.html?id=[product_id]`
   );
 });
