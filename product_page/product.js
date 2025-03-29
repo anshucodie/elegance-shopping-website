@@ -52,7 +52,7 @@ fetch("http://localhost:3000/api/data")
             <a href="/individual_page/main.html?id=${item._id}" class="product-link">
               <img src="${item.image}" alt="Product Name">
               <div class="product-info">
-                <h3>${item.name}</h3>
+                <h3 title="${item.name}">${item.name}</h3>
                 <p>Price: <span>₹${item.price}</span> </p>
                 <p>Rating: <i class="fa-regular fa-star" style="color: #000205;"></i> ${item.ratings}</p>
               </div>
