@@ -1,3 +1,5 @@
+window.allProducts = [];
+
 fetch("http://localhost:3000/api/data")
   .then((response) => {
     if (!response.ok) {
@@ -7,31 +9,27 @@ fetch("http://localhost:3000/api/data")
   })
   .then((data) => {
     let productHTML = "";
-    let allProducts = [];
 
     if (data && typeof data === "object") {
       Object.keys(data).forEach((coll) => {
         const collection = data[coll];
         if (Array.isArray(collection)) {
-          allProducts = allProducts.concat(collection);
+          window.allProducts = window.allProducts.concat(collection);
         }
       });
+      window.allProducts.sort((a, b) => a.name.localeCompare(b.name));
 
-      allProducts.sort((a, b) => a.name.localeCompare(b.name));
-
-      renderProducts(allProducts);
-    }
-
-    else {
+      renderProducts(window.allProducts);
+    } else {
       productHTML = "<p>No products available</p>";
       document.querySelector(".js-main").innerHTML = productHTML;
     }
 
-    const searchBar = document.getElementById("search-bar-input");
+        const searchBar = document.getElementById("search-bar-input");
     searchBar.addEventListener("input", function (e) {
       const searchTerm = e.target.value.toLowerCase();
 
-      const filteredProducts = binarySearch(allProducts, searchTerm);
+      const filteredProducts = binarySearch(window.allProducts, searchTerm);
       renderProducts(filteredProducts);
     });
 
@@ -72,7 +70,7 @@ fetch("http://localhost:3000/api/data")
 
       if (searchBar) {
         searchBar.value = "";
-        renderProducts(allProducts);
+        renderProducts(window.allProducts);
         console.log("Cleared search and rendered all products");
       } else {
         console.error("Search bar not found!");
