@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Function to render products
+  
   function renderProducts(products) {
     const mainContainer = document.querySelector(".js-main");
     if (!mainContainer) {
@@ -88,14 +89,16 @@ document.addEventListener("DOMContentLoaded", function () {
     products.forEach((item) => {
       productHTML += `
         <div class="product">
+          <a href="/individual_page/main.html?id=${item._id}" class="product-link">
           <img src="${item.image}" alt="Product Name">
           <div class="product-info">
-            <h3>${item.name}</h3>
+              <h3 title="${item.name}">${item.name}</h3>
             <p>Price: <span>₹${item.price}</span> </p>
             <p>Rating: <i class="fa-regular fa-star" style="color: #000205;"></i> ${item.ratings}</p>
+            </div>
+          </a>
             <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price="${item.price}" data-product-image="${item.image}">Add to Cart</button>
           </div>
-        </div>
       `;
     });
 
@@ -103,4 +106,5 @@ document.addEventListener("DOMContentLoaded", function () {
     mainContainer.classList.add("grid1");
     mainContainer.classList.add("grid-rows");
   }
+
 });
