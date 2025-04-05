@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Sort products alphabetically by name initially
-        allProducts = bubbleSort(allProducts, (a, b) => a.name.localeCompare(b.name));
+        allProducts = bubbleSort(allProductsmae, (a, b) => a.name.localeCompare(b.name));
 
       } else {
         console.error("Invalid data format received from API.");

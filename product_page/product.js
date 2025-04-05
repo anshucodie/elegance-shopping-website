@@ -1,3 +1,39 @@
+// Function to render products (make it globally accessible)
+function renderProducts(products) {
+  const mainContainer = document.querySelector(".js-main");
+  if (!mainContainer) {
+    console.error("Element with class 'js-main' not found.");
+    return;
+  }
+
+  if (products.length === 0) {
+    mainContainer.innerHTML = "<p>No products match your search.</p>";
+    return;
+  }
+
+  let productHTML = "";
+  products.forEach((item) => {
+    productHTML += `
+      <div class="product">
+        <a href="/individual_page/main.html?id=${item._id}" class="product-link">
+          <img src="${item.image}" alt="Product Name">
+          <div class="product-info">
+            <h3 title="${item.name}">${item.name}</h3>
+            <p>Price: <span>₹${item.price}</span> </p>
+            <p>Rating: <i class="fa-regular fa-star" style="color: #000205;"></i> ${item.ratings}</p>
+          </div>
+        </a>
+        <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price="${item.price}" data-product-image="${item.image}">Add to Cart</button>
+      </div>
+    `;
+  });
+
+  mainContainer.innerHTML = productHTML;
+  mainContainer.classList.add("grid1");
+  mainContainer.classList.add("grid-rows");
+}
+
+// Fetch products and initialize the page
 window.allProducts = [];
 
 fetch("http://localhost:3000/api/data")
@@ -8,8 +44,6 @@ fetch("http://localhost:3000/api/data")
     return response.json();
   })
   .then((data) => {
-    let productHTML = "";
-
     if (data && typeof data === "object") {
       Object.keys(data).forEach((coll) => {
         const collection = data[coll];
@@ -19,69 +53,52 @@ fetch("http://localhost:3000/api/data")
       });
       window.allProducts.sort((a, b) => a.name.localeCompare(b.name));
 
+      // Render all products initially
       renderProducts(window.allProducts);
     } else {
-      productHTML = "<p>No products available</p>";
-      document.querySelector(".js-main").innerHTML = productHTML;
+      document.querySelector(".js-main").innerHTML = "<p>No products available</p>";
     }
-
-        const searchBar = document.getElementById("search-bar-input");
-    searchBar.addEventListener("input", function (e) {
-      const searchTerm = e.target.value.toLowerCase();
-
-      const filteredProducts = binarySearch(window.allProducts, searchTerm);
-      renderProducts(filteredProducts);
-    });
-
-    function renderProducts(products) {
-      const mainContainer = document.querySelector(".js-main");
-      if (!mainContainer) {
-        console.error("Element with class 'js-main' not found.");
-        return;
-      }
-
-      if (products.length === 0) {
-        mainContainer.innerHTML = "<p>No products match your search.</p>";
-        return;
-      }
-
-      let productHTML = "";
-      products.forEach((item) => {
-        productHTML += `
-          <div class="product">
-            <a href="/individual_page/main.html?id=${item._id}" class="product-link">
-              <img src="${item.image}" alt="Product Name">
-              <div class="product-info">
-                <h3 title="${item.name}">${item.name}</h3>
-                <p>Price: <span>₹${item.price}</span> </p>
-                <p>Rating: <i class="fa-regular fa-star" style="color: #000205;"></i> ${item.ratings}</p>
-              </div>
-            </a>
-            <button class="add-to-cart-btn" data-product-id="${item._id}" data-product-name="${item.name}" data-product-price="${item.price}" data-product-image="${item.image}">Add to Cart</button>
-          </div>
-        `;
-      });
-
-      mainContainer.innerHTML = productHTML;
-      mainContainer.classList.add("grid1");
-      mainContainer.classList.add("grid-rows");
-    }
-
-    window.clearSearchAndRenderAll = function () {
-      const searchBar = document.getElementById("search-bar-input");
-
-      if (searchBar) {
-        searchBar.value = "";
-        renderProducts(window.allProducts);
-        console.log("Cleared search and rendered all products");
-      } else {
-        console.error("Search bar not found!");
-      }
-    };
   })
   .catch((error) => {
     console.error("Error fetching data:", error);
   });
+
+// Function to filter and render products by category
+function filterByCategory(category) {
+  const filteredProducts = window.allProducts.filter(
+    (product) => product.category.toLowerCase() === category.toLowerCase()
+  );
+  console.log("Filtered Products:", filteredProducts);
+  renderProducts(filteredProducts);
+}
+
+// Add event listeners to category buttons
+document.addEventListener("DOMContentLoaded", function () {
+  const menUpper = document.getElementById("men-upper");
+  const womenUpper = document.getElementById("women-upper");
+  const menLower = document.getElementById("men-lower");
+  const womenLower = document.getElementById("women-lower");
+
+  menUpper.addEventListener("click", function (e) {
+    e.preventDefault();
+    filterByCategory("Men's Upper");
+  });
+
+  womenUpper.addEventListener("click", function (e) {
+    e.preventDefault();
+    filterByCategory("Women's Upper");
+  });
+
+  menLower.addEventListener("click", function (e) {
+    e.preventDefault();
+    filterByCategory("Men's Lower");
+  });
+
+  womenLower.addEventListener("click", function (e) {
+    e.preventDefault();
+    filterByCategory("Women's Lower");
+  });
+});
 
 // Cart Functionality
 
@@ -226,48 +243,71 @@ document.addEventListener("DOMContentLoaded", function () {
   const catClose = document.getElementById("cat-close");
   const catOverlay = document.getElementById("cat-overlay");
 
-  // Debug elements
-  console.log("Categories Button:", catButton);
-  console.log("Categories Sidebar:", catSidebar);
-  console.log("Categories Close:", catClose);
-  console.log("Categories Overlay:", catOverlay);
+  const menUpper = document.getElementById("men-upper");
+  const womenUpper = document.getElementById("women-upper");
+  const menLower = document.getElementById("men-lower");
+  const womenLower = document.getElementById("women-lower");
 
-  // Check if all required elements exist
-  if (catButton && catSidebar && catClose && catOverlay) {
-    console.log("All category elements found - setting up event listeners");
+  // Open categories when CATEGORIES is clicked
+  catButton.addEventListener("click", function () {
+    catSidebar.classList.add("active");
+    catOverlay.classList.add("active");
+    document.body.style.overflow = "hidden"; // Prevent scrolling when categories panel is open
+  });
 
-    // Open categories when CATEGORIES is clicked
-    catButton.addEventListener("click", function () {
-      console.log("Categories button clicked");
-      catSidebar.classList.add("active");
-      catOverlay.classList.add("active");
-      document.body.style.overflow = "hidden"; // Prevent scrolling when categories panel is open
-    });
+  // Close categories when clicking on overlay
+  catOverlay.addEventListener("click", function () {
+    catSidebar.classList.remove("active");
+    catOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
 
-    // Close categories when clicking on overlay
-    catOverlay.addEventListener("click", function () {
-      console.log("Categories overlay clicked");
-      catSidebar.classList.remove("active");
-      catOverlay.classList.remove("active");
-      document.body.style.overflow = ""; // Re-enable scrolling
-    });
+  // Close categories when ✕ is clicked
+  catClose.addEventListener("click", function () {
+    catSidebar.classList.remove("active");
+    catOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
 
-    // Close categories when ✕ is clicked
-    catClose.addEventListener("click", function () {
-      console.log("Categories close button clicked");
-      catSidebar.classList.remove("active");
-      catOverlay.classList.remove("active");
-      document.body.style.overflow = ""; // Re-enable scrolling
-    });
-  } else {
-    console.error(
-      "One or more category panel elements are missing from the DOM",
-      {
-        catButton: !!catButton,
-        catSidebar: !!catSidebar,
-        catClose: !!catClose,
-        catOverlay: !!catOverlay,
-      }
+  // Function to filter and render products by category
+  function filterByCategory(category) {
+    const filteredProducts = window.allProducts.filter(
+      (product) => product.category.toLowerCase() === category.toLowerCase()
     );
+    console.log("Filtered Products:", filteredProducts);
+    renderProducts(filteredProducts);
   }
+
+  // Add event listeners to category buttons
+  menUpper.addEventListener("click", function (e) {
+    e.preventDefault();
+    filterByCategory("Men Tshirts");
+    catSidebar.classList.remove("active");
+    catOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
+
+  womenUpper.addEventListener("click", function (e) {
+    e.preventDefault();
+    filterByCategory("Women Tops");
+    catSidebar.classList.remove("active");
+    catOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
+
+  menLower.addEventListener("click", function (e) {
+    e.preventDefault();
+    filterByCategory("Men Trousers");
+    catSidebar.classList.remove("active");
+    catOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
+
+  womenLower.addEventListener("click", function (e) {
+    e.preventDefault();
+    filterByCategory("Women Jeans");
+    catSidebar.classList.remove("active");
+    catOverlay.classList.remove("active");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  });
 });
