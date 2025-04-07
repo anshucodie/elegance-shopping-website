@@ -56,7 +56,8 @@ fetch("http://localhost:3000/api/data")
       // Render all products initially
       renderProducts(window.allProducts);
     } else {
-      document.querySelector(".js-main").innerHTML = "<p>No products available</p>";
+      document.querySelector(".js-main").innerHTML =
+        "<p>No products available</p>";
     }
   })
   .catch((error) => {
@@ -129,22 +130,16 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = ""; // Re-enable scrolling
   });
 
-  // Function to display cart
-
+  // Function to save cart to localStorage
   function SaveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    saveCart(cart); // Use the shared utility
   }
 
   function LoadCart() {
-    const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      return JSON.parse(savedCart);
-    }
-    return [];
+    return loadCart(); // Use the shared utility
   }
 
   // CART FUNCTIONALITY
-
   const cart = LoadCart();
 
   CartDisplay();
@@ -158,11 +153,10 @@ document.addEventListener("DOMContentLoaded", function () {
       cartItemsContainer.innerHTML =
         '<p class="empty-cart-message">Your cart is empty.</p>';
       total.innerHTML = "<p> ₹0.00 </p>";
-      localStorage.clear();
       return;
     }
 
-    let totalPrice = 0;
+    let totalPrice = calculateCartTotal(cart); // Use the shared utility
 
     cart.forEach((item, index) => {
       const cartItemHTML = `
@@ -182,12 +176,9 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
       `;
       cartItemsContainer.innerHTML += cartItemHTML;
-
-      totalPrice += parseFloat(item.productPrice) * item.quantity;
-      console.log(typeof totalPrice);
-      total.innerHTML = `<p> ₹${totalPrice.toFixed(2)} </p>`;
     });
 
+    total.innerHTML = `<p> ₹${totalPrice.toFixed(2)} </p>`;
     SaveCart();
   }
 
@@ -218,23 +209,76 @@ document.addEventListener("DOMContentLoaded", function () {
       const productId = e.target.dataset.productId;
       const productImage = e.target.dataset.productImage;
 
-      let matchingItem = cart.find((item) => item.productId === productId);
+      // Use shared utility to add to cart
+      addToCart(productId, productName, productPrice, productImage);
 
-      if (matchingItem) {
-        matchingItem.quantity += 1;
-      } else {
-        cart.push({
-          productId: productId,
-          productName: productName,
-          productPrice: productPrice,
-          productImage: productImage,
-          quantity: 1,
-        });
-      }
-
+      // Reload cart after adding item
+      Object.assign(cart, LoadCart());
       CartDisplay();
-      console.log(cart);
     }
+  });
+
+  // Function to get/generate user ID
+  function getUserId() {
+    let userId = localStorage.getItem("userId");
+    if (!userId) {
+      userId = "user_" + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem("userId", userId);
+    }
+    return userId;
+  }
+
+  // Checkout functionality
+  const checkoutBtn = document.querySelector(".checkout-btn");
+  checkoutBtn.addEventListener("click", function () {
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    // Create order object
+    const order = {
+      userId: getUserId(),
+      items: cart.map((item) => ({
+        productId: item.productId,
+        productName: item.productName,
+        productPrice: item.productPrice,
+        productImage: item.productImage,
+        quantity: item.quantity,
+      })),
+      totalAmount: calculateCartTotal(cart),
+      status: "Completed",
+    };
+
+    // Send order to server
+    fetch("http://localhost:3000/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        alert("Order placed successfully!");
+        // Clear cart
+        clearCart();
+        Object.assign(cart, []);
+        CartDisplay();
+        // Close cart sidebar
+        cartSidebar.classList.remove("active");
+        cartOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+      })
+      .catch((error) => {
+        console.error("Error placing order:", error);
+        alert("Failed to place order. Please try again.");
+      });
   });
 
   // Categories functionality

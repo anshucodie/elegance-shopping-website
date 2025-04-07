@@ -12,9 +12,15 @@
       rel="stylesheet"
     />
     <link
+      href="https://fonts.googleapis.com/css2?family=Bentham&family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
+    <!-- Load the shared cart utils -->
+    <script src="/cart-utils.js"></script>
     <!-- Load the main script early to ensure cart functionality is available -->
     <script src="/script.js"></script>
   </head>
@@ -34,7 +40,7 @@
         </div>
         <div class="navbar">
           <div class="search">
-            <input placeholder="SEARCH" name="" id="" />
+            <button id="order-history-btn">ORDER HISTORY</button>
           </div>
           <div class="filter_cart">
             <span id="cart">CART</span>
@@ -54,7 +60,6 @@
       </div>
       <div class="cart-content">
         <div class="empty-cart-message">Your cart is empty</div>
-        <!-- Cart items will be added here dynamically -->
       </div>
       <div class="cart-footer">
         <div class="cart-total">
@@ -64,6 +69,19 @@
         <button class="checkout-btn">Checkout</button>
       </div>
     </div>
+
+    <div class="order-history" id="order-history">
+      <div class="order-history-content">
+        <div class="order-history-header">
+          <h3>YOUR ORDER HISTORY</h3>
+          <div class="order-history-close" id="order-history-close">✕</div>
+        </div>
+        <div class="order-history-list">
+          <p class="loading-message">Loading your orders...</p>
+        </div>
+      </div>
+    </div>
+    <div class="order-history-overlay" id="order-history-overlay"></div>
 
     <div class="page">
       <div class="product_img">
