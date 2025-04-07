@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     total.innerHTML = `<p> ₹${totalPrice.toFixed(2)} </p>`;
-    SaveCart();
+    saveCart(cart); // Ensure this is not called after clearing the cart
   }
 
   window.Increase = function (index) {
