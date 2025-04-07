@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create order object
     const order = {
-      userId: getUserId(), // Get user ID (in this demo, we'll use a random ID)
+      userId: getUserId(),
       items: cart.map((item) => ({
         productId: item.productId,
         productName: item.productName,
@@ -163,10 +163,14 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((data) => {
         alert("Order placed successfully!");
-        // Clear cart
+
+        // Clear the cart
         clearCart();
-        Object.assign(cart, []);
+        cart.length = 0;
+
+        // Update the cart display
         CartDisplay();
+
         // Close cart sidebar
         cartSidebar.classList.remove("active");
         cartOverlay.classList.remove("active");
@@ -226,10 +230,26 @@ document.addEventListener("DOMContentLoaded", function () {
           `;
 
           order.items.forEach((item) => {
+            // Use the image field from MongoDB instead of productImage
+            let imageUrl = item.image || item.productImage;
+
+            // If the image URL is a relative path (doesn't start with http or https)
+            if (!imageUrl.startsWith("http") && !imageUrl.startsWith("https")) {
+              // If it starts with a slash, it's relative to the domain root
+              if (imageUrl.startsWith("/")) {
+                imageUrl = `http://localhost:3000${imageUrl}`;
+              } else {
+                // Otherwise, it's relative to the current path
+                imageUrl = `http://localhost:3000/${imageUrl}`;
+              }
+            }
+
+            console.log("Image URL:", imageUrl); // Debug log
+
             orderHTML += `
               <div class="order-product">
                 <div class="order-product-image">
-                  <img src="${item.productImage}" alt="${item.productName}">
+                  <img src="${imageUrl}" alt="${item.productName}" onerror="this.onerror=null; this.src='/components/placeholder.jpg'; console.log('Image failed to load:', this.src);">
                 </div>
                 <div class="order-product-info">
                   <p>${item.productName}</p>
@@ -253,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => {
         console.error("Error loading order history:", error);
         orderHistoryList.innerHTML =
-          '<p class="error-message">Failed to load orders. Please try again.</p>';
+          '<p class="error-message">Error loading order history. Please try again later.</p>';
       });
   }
 
