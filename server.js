@@ -74,6 +74,7 @@ async function connectToDatabase() {
     collections.menUppers = database.collection("MenUppers");
     collections.womenUppers = database.collection("WomenUppers");
     collections.womenLowers = database.collection("WomenLowers");
+    collections.orders = database.collection("Orders");
 
     app.get("/api/data", async (req, res) => {
       try {
@@ -128,6 +129,53 @@ async function connectToDatabase() {
       } catch (err) {
         console.error("Error fetching product:", err);
         res.status(500).json({ error: "Failed to fetch product" });
+      }
+    });
+
+    // API endpoint to save an order
+    app.post("/api/orders", async (req, res) => {
+      try {
+        const order = req.body;
+        order.timestamp = new Date();
+
+        const result = await collections.orders.insertOne(order);
+        res.status(201).json({
+          success: true,
+          message: "Order placed successfully",
+          orderId: result.insertedId,
+        });
+      } catch (err) {
+        console.error("Error saving order:", err);
+        res.status(500).json({ error: "Failed to save order" });
+      }
+    });
+
+    // API endpoint to get all orders for a user
+    app.get("/api/orders/:userId", async (req, res) => {
+      try {
+        const userId = req.params.userId;
+        const orders = await collections.orders
+          .find({ userId: userId })
+          .sort({ timestamp: -1 })
+          .toArray();
+        res.json(orders);
+      } catch (err) {
+        console.error("Error fetching orders:", err);
+        res.status(500).json({ error: "Failed to fetch orders" });
+      }
+    });
+
+    // API endpoint to get all orders from the database
+    app.get("/api/orders", async (req, res) => {
+      try {
+        const orders = await collections.orders
+          .find({})
+          .sort({ timestamp: -1 })
+          .toArray();
+        res.json(orders);
+      } catch (err) {
+        console.error("Error fetching all orders:", err);
+        res.status(500).json({ error: "Failed to fetch orders" });
       }
     });
   } catch (err) {
